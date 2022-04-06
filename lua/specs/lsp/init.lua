@@ -9,6 +9,8 @@ M.requires = {
 om.lsp = {}
 
 M.config = function()
+  local u = require('main.utils')
+
   local lsp_installer = require('nvim-lsp-installer')
 
   vim.diagnostic.config({
@@ -75,19 +77,21 @@ M.config = function()
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    u.bufmap_keys(bufnr, {
+      {'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>'},
+      {'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>'},
+      {'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>'},
+      {'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>'},
+      {'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>'},
+      {'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
+      {'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
+      {'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'},
+      {'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
+      {'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
+      {'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
+      {'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>'},
+      {'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>'}
+    })
   end
 
   -- Installing servers
@@ -104,7 +108,17 @@ M.config = function()
     local default_opts = { on_attach = om.lsp.on_attach, capabilities = capabilities }
 
     -- set custom server config
-    local server_opts = {}
+    local server_opts = {
+      ['gopls'] = function()
+        -- disable formmating from gopls and defines null-ls as default client
+        default_opts.on_attach = function(client)
+          client.resolved_capabilities.document_formatting = false
+          client.resolved_capabilities.document_range_formatting = false
+        end
+
+        return default_opts
+      end
+    }
 
     server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
     vim.cmd('do User LspAttachBuffers')
