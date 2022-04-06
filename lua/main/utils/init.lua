@@ -19,6 +19,7 @@ end
 function M.nnoremap(lhs, rhs) M.noremap('n', lhs, rhs) end
 function M.inoremap(lhs, rhs) M.noremap('i', lhs, rhs) end
 function M.vnoremap(lhs, rhs) M.noremap('v', lhs, rhs) end
+function M.xnoremap(lhs, rhs) M.noremap('x', lhs, rhs) end
 
 function M.map_leader_keys(mappings, mode)
   for map, cmdm in pairs(mappings) do
@@ -38,7 +39,6 @@ end
 function M.colors()
   local configuration = vim.fn['sonokai#get_configuration']()
   return vim.fn['sonokai#get_palette'](configuration.style)
-  -- return colors
 end
 
 return M
