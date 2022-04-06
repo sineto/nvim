@@ -25,6 +25,7 @@ cmd([[packadd packer.nvim]])
 return require('packer').startup(function(use)
   -- Let Packer manage itself
   use(require('specs.packer'))
+  use({'nathom/filetype.nvim'})
 
   use(require('specs.lsp'))
 
