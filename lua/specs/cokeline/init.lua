@@ -35,8 +35,6 @@ M.config = function ()
       }
     },
 
-    rendering = { max_buffer_width = 25 },
-
     components = {
       {
         text = function(buffer) return ' ' .. buffer.devicon.icon end,

@@ -28,6 +28,7 @@ return require('packer').startup(function(use)
 
   -- Treesitter
   use(require('specs.treesitter'))
+  use(require('specs.treesitter.textobjects'))
 
   -- UI
   use(require('specs.neotree'))
