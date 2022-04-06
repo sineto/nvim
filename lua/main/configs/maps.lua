@@ -32,7 +32,11 @@ function maps.setup()
   -- toggle number, relativenumber
   nnoremap('<leader>cn', ':CycleNumbering<cr>')
 
-  -- splits
+  -- splits move around and open split
+  noremap('', '<C-h>', '<C-w>h')
+  noremap('', '<C-j>', '<C-w>j')
+  noremap('', '<C-k>', '<C-w>k')
+  noremap('', '<C-l>', '<C-w>l')
   nnoremap("<leader>hs", ":split<CR>")
   nnoremap("<leader>vs", ":vsplit<CR>")
 

@@ -34,6 +34,7 @@ return require('packer').startup(function(use)
   use(require('specs.cokeline'))
   use(require('specs.fzf'))
   use(require('specs.tmux_navigator'))
+  use(require('specs.searchbox'))
 
   -- Themes
   use(require('specs.sonokai'))

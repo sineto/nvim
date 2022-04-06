@@ -42,18 +42,18 @@ function opts.setup()
   o.ignorecase      = true  -- ignore case when using lowercase in search
   o.smartcase       = true  -- but don't ignore it when using upper case
   o.smarttab        = true
-  o.autoindent      = true
   o.inccommand      = 'nosplit'
-  o.softtabstop     = 2
   o.splitbelow      = true
   o.splitright      = true
   o.lazyredraw      = true
   o.scrolloff       = 12    -- Minimum offset in lines to screen borders
   o.sidescrolloff   = 8
 
+  bo.autoindent      = true
   bo.smartindent     = true
   bo.expandtab       = true
   bo.tabstop         = 2
+  bo.softtabstop     = 2
   bo.shiftwidth      = 2
 
   o.wrap            = true

@@ -35,4 +35,10 @@ function M.create_augroup(name, autocmds)
   cmd('augroup END')
 end
 
+function M.colors()
+  local configuration = vim.fn['sonokai#get_configuration']()
+  return vim.fn['sonokai#get_palette'](configuration.style)
+  -- return colors
+end
+
 return M
