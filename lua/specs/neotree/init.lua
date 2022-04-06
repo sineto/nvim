@@ -7,6 +7,13 @@ M.requires = {
 }
 
 M.config = function()
+  require('neo-tree').setup({
+    close_if_last_window = true,
+    window = {
+      width = 32,
+    }
+  })
+
   require('main.utils').map_leader_keys({
     b = '<cmd>NeoTreeShowToggle<cr>',
   })
