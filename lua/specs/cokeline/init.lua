@@ -5,6 +5,8 @@ M.requires = {'kyazdani42/nvim-web-devicons'}
 M.config = function ()
 
   local get_hex = require('cokeline/utils').get_hex
+  local colors = require('main.utils').colors()
+
   require('cokeline').setup({
     default_hl = {
       fg = function(buffer)
@@ -33,6 +35,8 @@ M.config = function ()
       }
     },
 
+    rendering = { max_buffer_width = 25 },
+
     components = {
       {
         text = function(buffer) return ' ' .. buffer.devicon.icon end,
@@ -45,6 +49,15 @@ M.config = function ()
       },
       {
         text = function(buffer) return buffer.filename .. ' ' end,
+      },
+      {
+        text = function(buffer)
+          if buffer.is_modified then return "● " end
+          return ""
+        end,
+        fg = function(buffer)
+          return buffer.is_focused and colors.orange[1]
+        end,
       },
       {
         text = '',
