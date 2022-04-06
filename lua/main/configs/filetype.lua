@@ -10,10 +10,7 @@ function ft.setup()
   -- GO
   cmd('autocmd FileType go set si autoindent ts=4 sts=4 sw=4 sta noexpandtab formatoptions=croql')
 
-  u.create_augroup('golang_filetype', {
-    { 'BufWritePre', '*.go', 'lua vim.lsp.buf.formatting()' },
-    { 'BufWritePre', '*.go', 'lua goimports(1000)' },
-  })
+  u.create_augroup('golang_filetype', {})
 
   -- MISC
   cmd('au BufNewFile,BufRead * if &ft == "" | set ft=text | endif')

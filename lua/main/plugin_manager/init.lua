@@ -26,9 +26,10 @@ return require('packer').startup(function(use)
   -- Let Packer manage itself
   use(require('specs.packer'))
 
+  use(require('specs.lsp'))
+
   -- Treesitter
   use(require('specs.treesitter'))
-  use(require('specs.treesitter.textobjects'))
 
   -- UI
   use(require('specs.neotree'))
