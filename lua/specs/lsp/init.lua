@@ -2,31 +2,32 @@ local M = {'williamboman/nvim-lsp-installer'}
 
 M.requires = {
   'neovim/nvim-lspconfig',
+  'ThePrimeagen/refactoring.nvim',
   require('specs.lsp.null-ls'),
-  require('specs.lsp.fidget')
+  require('specs.lsp.fidget'),
+  require('specs.lsp.trouble')
 }
 
 om.lsp = {}
 
+M.setup = function ()
+end
+
 M.config = function()
   local u = require('main.utils')
-
   local lsp_installer = require('nvim-lsp-installer')
 
-  vim.diagnostic.config({
-    severity_sort = true,
-    signs = true,
-    underline = false, -- Do not underline code
-    update_in_insert = false,
-    virtual_text = false,
-    -- virtual_text = {
-    -- 	prefix = "",
-    -- 	spacing = 0,
-    -- },
-  })
+  om.lsp.servers = {
+    'gopls'
+  }
 
-  local max_width = math.max(math.floor(vim.o.columns * 0.7), 100)
-  local max_height = math.max(math.floor(vim.o.lines * 0.3), 30)
+  vim.diagnostic.config({
+    virtual_text = false,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false,
+  })
 
   -- Sign column
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
@@ -35,22 +36,17 @@ M.config = function()
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
 
-  om.lsp.servers = {
-    'gopls'
-  }
-
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      'documentation',
-      'detail',
-      'additionalTextEdits',
-    }
-  }
+  -- capabilities.textDocument.completion.completionItem.snippetSupport = true
+  -- capabilities.textDocument.completion.completionItem.resolveSupport = {
+  --   properties = {
+  --     'documentation',
+  --     'detail',
+  --     'additionalTextEdits',
+  --   }
+  -- }
 
   function om.lsp.on_attach(client, bufnr)
-    local opts = { noremap=true, silent=true }
 
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -82,10 +78,6 @@ M.config = function()
       {'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>'},
       {'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>'},
       {'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>'},
-      {'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>'},
-      {'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>'},
-      {'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>'},
-      {'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>'},
       {'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
       {'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
       {'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
@@ -93,6 +85,17 @@ M.config = function()
       {'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>'}
     })
   end
+
+  lsp_installer.settings({
+    log_level = vim.log.levels.DEBUG,
+    ui = {
+      icons = {
+        server_installed = "",
+        server_pending = "",
+        server_uninstalled = "",
+      },
+    },
+  })
 
   -- Installing servers
   for _, name in pairs(om.lsp.servers) do
@@ -123,6 +126,8 @@ M.config = function()
     server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
     vim.cmd('do User LspAttachBuffers')
   end)
+
+  vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
 end
 
 return M

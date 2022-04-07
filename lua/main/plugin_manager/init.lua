@@ -26,21 +26,28 @@ return require('packer').startup(function(use)
   -- Let Packer manage itself
   use(require('specs.packer'))
   use({'nathom/filetype.nvim'})
+  use(require('specs.searchbox'))
 
+  -- Lsp
   use(require('specs.lsp'))
 
   -- Treesitter
   use(require('specs.treesitter'))
+  use(require('specs.treesitter.hlargs'))
 
   -- UI
   use(require('specs.neotree'))
   use(require('specs.cokeline'))
   use(require('specs.fzf'))
   use(require('specs.tmux_navigator'))
-  use(require('specs.searchbox'))
 
   -- Themes
   use(require('specs.sonokai'))
+
+  use(require('specs.vimade'))
+  use(require('specs.gitsigns'))
+  use(require('specs.numb'))
+  use(require('specs.neoscroll'))
 
   if packer_bootstrap then
     require('packer').sync()

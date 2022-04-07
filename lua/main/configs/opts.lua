@@ -22,12 +22,12 @@ function opts.setup()
   ]])
 
   -- Visual
+  o.termguicolors   = true  -- use true colors
   o.cmdheight       = 1
   o.pumheight       = 9     -- number of items show in pop up menu
   o.showtabline     = 2     -- always show tabline
   o.laststatus      = 2
   o.title           = true
-  o.termguicolors   = true  -- use true colors
   o.background      = 'dark'
   o.shortmess       = 'atc'
   wo.signcolumn     = 'yes'
@@ -68,6 +68,7 @@ function opts.setup()
   o.hidden          = true    -- allow buffer switching without saving
   o.autoread        = true    -- refresh buffer if file has been changed externally
   o.foldenable      = false
+  o.updatetime      = 250
 end
 
 return opts
