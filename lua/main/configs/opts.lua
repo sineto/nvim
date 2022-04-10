@@ -69,6 +69,9 @@ function opts.setup()
   o.autoread        = true    -- refresh buffer if file has been changed externally
   o.foldenable      = false
   o.updatetime      = 250
+  o.wildmode = 'list:longest'
+  o.completeopt = 'menu,menuone,noinsert,noselect'
+  o.clipboard = 'unnamed,unnamedplus'
 end
 
 return opts

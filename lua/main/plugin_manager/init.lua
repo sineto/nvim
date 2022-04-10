@@ -24,30 +24,50 @@ cmd([[packadd packer.nvim]])
 -- Initialize pluggins
 return require('packer').startup(function(use)
   -- Let Packer manage itself
-  use(require('specs.packer'))
-  use({'nathom/filetype.nvim'})
-  use(require('specs.searchbox'))
+  use({'wbthomason/packer.nvim', opt = true})
+
+  use({'nathom/filetype.nvim'})         -- discrease nvim startup purpose
+  use(require('specs.lualine'))         -- status line
+  use(require('specs.git_utils'))
+  use(require('specs.diffview'))
 
   -- Lsp
-  use(require('specs.lsp'))
+  use(require('specs.lsp'))             -- language server
+
+  -- Code completions
+  use(require('specs.nvim-cmp'))
 
   -- Treesitter
   use(require('specs.treesitter'))
   use(require('specs.treesitter.hlargs'))
 
   -- UI
-  use(require('specs.neotree'))
-  use(require('specs.cokeline'))
-  use(require('specs.fzf'))
-  use(require('specs.tmux_navigator'))
+  use(require('specs.neotree'))         -- file explorer
+  use(require('specs.cokeline'))        -- bufferline
+  use(require('specs.fzf'))             -- fuzzy finder
+  use(require('specs.gitsigns'))        -- git signs vscode like
+  use(require('specs.vimade'))
+
+  -- Utilities
+  use(require('specs.numb'))            -- jump line nicely
+  use(require('specs.neoscroll'))       -- smooth scroll
+  use(require('specs.tmux_navigator'))  -- navigate between tmux pane and nvim window
 
   -- Themes
-  use(require('specs.sonokai'))
+  use(require('specs.sonokai'))         -- monokai pro like theme
 
-  use(require('specs.vimade'))
-  use(require('specs.gitsigns'))
-  use(require('specs.numb'))
-  use(require('specs.neoscroll'))
+  -- Editor
+  use(require('specs.autopairs'))       -- auto close pairs
+  use(require('specs.tabout'))          -- jump through pairs
+  use('fedepujol/move.nvim')            -- move around lines and blocks
+  use('tpope/vim-surround')
+  use('kana/vim-textobj-user')
+  use('kana/vim-textobj-line')          -- select line
+  use('sgur/vim-textobj-parameter')     -- select params
+
+  -- seems searchbox.nvim have conflicts with some plugins
+  -- so I move those to be loaded before it
+  use(require('specs.searchbox'))       -- nicely search tool
 
   if packer_bootstrap then
     require('packer').sync()

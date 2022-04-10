@@ -5,13 +5,10 @@ M.requires = {
   'ThePrimeagen/refactoring.nvim',
   require('specs.lsp.null-ls'),
   require('specs.lsp.fidget'),
-  require('specs.lsp.trouble')
+  require('specs.lsp.trouble'),
 }
 
 om.lsp = {}
-
-M.setup = function ()
-end
 
 M.config = function()
   local u = require('main.utils')
@@ -37,17 +34,17 @@ M.config = function()
   end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  -- capabilities.textDocument.completion.completionItem.snippetSupport = true
-  -- capabilities.textDocument.completion.completionItem.resolveSupport = {
-  --   properties = {
-  --     'documentation',
-  --     'detail',
-  --     'additionalTextEdits',
-  --   }
-  -- }
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      'documentation',
+      'detail',
+      'additionalTextEdits',
+    }
+  }
 
   function om.lsp.on_attach(client, bufnr)
-
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -82,7 +79,8 @@ M.config = function()
       {'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
       {'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
       {'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>'},
-      {'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>'}
+      {'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>'},
+      {'n', '<space>cc', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})<CR>'},
     })
   end
 
@@ -106,28 +104,33 @@ M.config = function()
     end
   end
 
+  -- Set custom server config
+  local server_opts = {
+    ['gopls'] = function(opts)
+      -- disable formmating from gopls and defines null-ls as default client
+      opts.on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end
+
+      return opts
+    end
+  }
+
   -- Servers ready to setup
   lsp_installer.on_server_ready(function(server)
-    local default_opts = { on_attach = om.lsp.on_attach, capabilities = capabilities }
-
-    -- set custom server config
-    local server_opts = {
-      ['gopls'] = function()
-        -- disable formmating from gopls and defines null-ls as default client
-        default_opts.on_attach = function(client)
-          client.resolved_capabilities.document_formatting = false
-          client.resolved_capabilities.document_range_formatting = false
-        end
-
-        return default_opts
-      end
+    local default_opts = {
+      on_attach = om.lsp.on_attach,
+      capabilities = capabilities
     }
 
-    server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
+    if server_opts[server.name] then
+      server_opts[server.name](default_opts)
+    end
+
+    server:setup(default_opts)
     vim.cmd('do User LspAttachBuffers')
   end)
-
-  vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
 end
 
 return M

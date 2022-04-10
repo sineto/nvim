@@ -37,8 +37,8 @@ function maps.setup()
   noremap('', '<C-j>', '<C-w>j')
   noremap('', '<C-k>', '<C-w>k')
   noremap('', '<C-l>', '<C-w>l')
-  nnoremap("<leader>hs", ":split<CR>")
-  nnoremap("<leader>vs", ":vsplit<CR>")
+  nnoremap('<leader>hs', ':split<CR>')
+  nnoremap('<leader>vs', ':vsplit<CR>')
 
   -- Undo and Redo on insert mode
   inoremap('<C-u>', '<C-o>u')
@@ -49,17 +49,26 @@ function maps.setup()
   inoremap('<C-s>', '<Esc>:w<cr>a')
 
     -- Copy to system clippboard
-  nnoremap("<leader>y", '"+y')
-  vnoremap("<leader>y", '"+y')
+  nnoremap('<leader>y', '"+y')
+  vnoremap('<leader>y', '"+y')
 
   -- Paste from system clippboard
-  nnoremap("<leader>p", '"+p')
-  vnoremap("<leader>p", '"+p')
+  nnoremap('<leader>p', '"+p')
+  vnoremap('<leader>p', '"+p')
 
   -- Clear highlight search
-  nnoremap("<leader>nh", ":nohlsearch<CR>")
-  vnoremap("<leader>nh", ":nohlsearch<CR>")
+  nnoremap('<leader>nh', ':nohlsearch<CR>')
+  vnoremap('<leader>nh', ':nohlsearch<CR>')
 
+  -- Move lines and blocks
+  nnoremap('<A-j>', ':MoveLine(1)<cr>')
+  nnoremap('<A-k>', ':MoveLine(-1)<cr>')
+  vnoremap('<A-j>', ':MoveBlock(1)<cr>')
+  vnoremap('<A-k>', ':MoveBlock(-1)<cr>')
+  vnoremap('<A-l>', ':MoveHBlock(1)<cr>')
+  vnoremap('<A-h>', ':MoveHBlock(-1)<cr>')
+
+  -- Clip board system
   cmd([[
     "" Use the system clipboard:
     "" very usefull if you use Tmux and desire yank and copy text
@@ -74,6 +83,7 @@ function maps.setup()
     ""
   ]])
 
+  -- Abbreviation
   cmd([[
     "" exiting and saving
     cnoreabbrev W! w!
