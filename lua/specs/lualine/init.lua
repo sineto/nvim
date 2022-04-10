@@ -5,6 +5,14 @@ M.requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 M.config = function()
   local colors = require('main.utils').colors()
 
+  local function window()
+    return 'W' .. vim.api.nvim_win_get_number(0) .. "|"
+  end
+
+  local function branch()
+    return '⎇  ' .. vim.b.gitsigns_head
+  end
+
   local function diff_source()
     local gitsigns = vim.b.gitsigns_status_dict
     if gitsigns then
@@ -28,10 +36,6 @@ M.config = function()
     source = diff_source
   }
 
-  local function window()
-    return 'W' .. vim.api.nvim_win_get_number(0) .. "|"
-  end
-
   local diagnostics = {
     'diagnostics',
     sources = {'nvim_diagnostic'},
@@ -52,7 +56,7 @@ M.config = function()
     sections = {
       lualine_a = {'mode'},
       lualine_b = {window, 'filename'},
-      lualine_c = {{'b:gitsigns_head'}, diff},
+      lualine_c = {branch, diff},
       lualine_x = {diagnostics, 'filetype', 'encoding'},
       lualine_y = {'progress'},
       lualine_z = {'location'}

@@ -9,8 +9,10 @@ function ft.setup()
 
   -- GO
   cmd('autocmd FileType go set si autoindent ts=4 sts=4 sw=4 sta noexpandtab formatoptions=croql')
-
   u.create_augroup('golang_filetype', {})
+
+  -- Javascript, Typescript
+  cmd('autocmd FileType javascript,typescript set si autoindent ts=2 sts=4 sw=2 sta et')
 
   -- MISC
   cmd('au BufNewFile,BufRead * if &ft == "" | set ft=text | endif')

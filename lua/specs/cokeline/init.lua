@@ -3,24 +3,28 @@ local M = {'noib3/nvim-cokeline'}
 M.requires = {'kyazdani42/nvim-web-devicons'}
 
 M.config = function ()
-
+  local nnoremap = require('main.utils').nnoremap
   local get_hex = require('cokeline/utils').get_hex
   local colors = require('main.utils').colors()
+
+  nnoremap('<C-A-h>', '<Plug>(cokeline-switch-prev)')
+  nnoremap('<C-A-l>', '<Plug>(cokeline-switch-next)')
+  nnoremap('<A-a>', '<Plug>(cokeline-focus-prev)')
+  nnoremap('<A-s>', '<Plug>(cokeline-focus-next)')
+
+  for i = 1,9 do
+    nnoremap(('<Leader>%s'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i))
+  end
 
   require('cokeline').setup({
     default_hl = {
       fg = function(buffer)
         return
           buffer.is_focused
-          and get_hex('ColorColumn', 'bg')
-           or get_hex('Normal', 'fg')
+          and colors.yellow[1]
+           or get_hex('Comment', 'fg')
       end,
-      bg = function(buffer)
-        return
-          buffer.is_focused
-          and get_hex('Normal', 'fg')
-           or get_hex('ColorColumn', 'bg')
-      end,
+      bg = get_hex('ColorColumn', 'bg')
     },
 
     sidebar = {
@@ -41,8 +45,12 @@ M.config = function ()
         fg = function(buffer) return buffer.devicon.color end,
       },
       {
+        text = function(buffer)
+          return buffer.index .. ': '
+        end,
+      },
+      {
         text = function(buffer) return buffer.unique_prefix end,
-        fg = get_hex('Comment', 'fg'),
         style = 'italic',
       },
       {
@@ -55,7 +63,7 @@ M.config = function ()
         end,
         fg = function(buffer)
           return buffer.is_focused and colors.orange[1]
-        end,
+        end
       },
       {
         text = '',
