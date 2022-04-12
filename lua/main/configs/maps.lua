@@ -9,6 +9,7 @@ function maps.setup()
   local nnoremap   = u.nnoremap
   local inoremap   = u.inoremap
   local vnoremap   = u.vnoremap
+  local xnoremap   = u.xnoremap
   local map_leader = u.map_leader_keys
 
   vim.g.mapleader       = ','
@@ -68,6 +69,29 @@ function maps.setup()
   vnoremap('<A-l>', ':MoveHBlock(1)<cr>')
   vnoremap('<A-h>', ':MoveHBlock(-1)<cr>')
 
+  -- Cokeline
+  nnoremap('<C-A-h>', '<Plug>(cokeline-switch-prev)')
+  nnoremap('<C-A-l>', '<Plug>(cokeline-switch-next)')
+  nnoremap('<A-a>', '<Plug>(cokeline-focus-prev)')
+  nnoremap('<A-s>', '<Plug>(cokeline-focus-next)')
+
+  for i = 1,9 do
+    nnoremap(('<Leader>%s'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i))
+  end
+
+  -- Leader maps
+  map_leader({
+    -- packer.nvim
+    mc = '<cmd>PackerCompile<cr>',
+    mi = '<cmd>PackerInstall<cr>',
+    mu = '<cmd>PackerUpdate<cr>',
+    ms = '<cmd>PackerSync<cr>',
+
+    -- vim-twiggy and git_actions
+    gcop = '<cmd>Twiggy<cr>',
+    gcb = '<cmd>GitActionsCheckoutB<cr>'
+  })
+
   -- Clip board system
   cmd([[
     "" Use the system clipboard:
@@ -98,13 +122,6 @@ function maps.setup()
     cnoreabbrev X x
     cnoreabbrev Q q
   ]])
-
-  map_leader({
-    mc = '<cmd>PackerCompile<cr>',
-    mi = '<cmd>PackerInstall<cr>',
-    mu = '<cmd>PackerUpdate<cr>',
-    ms = '<cmd>PackerSync<cr>',
-  })
 end
 
 return maps

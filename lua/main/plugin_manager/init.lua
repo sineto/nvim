@@ -27,9 +27,6 @@ return require('packer').startup(function(use)
   use({'wbthomason/packer.nvim', opt = true})
 
   use({'nathom/filetype.nvim'})         -- discrease nvim startup purpose
-  use(require('specs.lualine'))         -- status line
-  use(require('specs.git_utils'))
-  use(require('specs.diffview'))
 
   -- Lsp
   use(require('specs.lsp'))             -- language server
@@ -42,6 +39,7 @@ return require('packer').startup(function(use)
   use(require('specs.treesitter.hlargs'))
 
   -- UI
+  use(require('specs.lualine'))         -- status line
   use(require('specs.neotree'))         -- file explorer
   use(require('specs.cokeline'))        -- bufferline
   use(require('specs.fzf'))             -- fuzzy finder
@@ -52,6 +50,8 @@ return require('packer').startup(function(use)
   use(require('specs.numb'))            -- jump line nicely
   use(require('specs.neoscroll'))       -- smooth scroll
   use(require('specs.tmux_navigator'))  -- navigate between tmux pane and nvim window
+  use(require('specs.git_utils'))
+  use(require('specs.diffview'))
 
   -- Themes
   use(require('specs.sonokai'))         -- monokai pro like theme
@@ -68,6 +68,8 @@ return require('packer').startup(function(use)
   -- seems searchbox.nvim have conflicts with some plugins
   -- so I move those to be loaded before it
   use(require('specs.searchbox'))       -- nicely search tool
+
+  use('~/.config/nvim/bundle/git_actions')
 
   if packer_bootstrap then
     require('packer').sync()

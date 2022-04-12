@@ -13,6 +13,18 @@ M.config = function()
     close_if_last_window = true,
     window = {
       width = 32,
+    },
+    filesystem = {
+      filtered_items = {
+        visible = true,
+        hide_gitignored = false,
+        never_show = {
+          '.git',
+          'node_modules',
+          '.tool-versions',
+          '.idea',
+        }
+      }
     }
   })
 

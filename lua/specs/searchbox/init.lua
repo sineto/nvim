@@ -4,9 +4,11 @@ M.requires = {'MunifTanjim/nui.nvim'}
 
 M.config = function()
   local u = require('main.utils')
-  local nnoremap = u.nnoremap
-  local xnoremap = u.xnoremap
 
+  local nnoremap   = u.nnoremap
+  local xnoremap   = u.xnoremap
+
+  -- SearchBox
   nnoremap('<C-f>', ':SearchBoxIncSearch<cr>')
   nnoremap('<leader>rpl', ':SearchBoxReplace<cr>')
   xnoremap('<leader>rpl', ':SearchBoxReplace visual_mode=true<cr>')
