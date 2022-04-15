@@ -6,6 +6,7 @@ M.requires = {
   require('specs.lsp.null-ls'),
   require('specs.lsp.fidget'),
   require('specs.lsp.trouble'),
+  require('specs.lsp.saga')
 }
 
 om.lsp = {}
@@ -73,12 +74,12 @@ M.config = function()
     u.bufmap_keys(bufnr, {
       {'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>'},
       {'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>'},
-      {'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>'},
+      -- {'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>'},
       {'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>'},
       {'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>'},
       {'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>'},
       {'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>'},
-      {'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>'},
+      -- {'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>'},
       {'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>'},
       {'n', '<space>cc', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})<CR>'},
     })
