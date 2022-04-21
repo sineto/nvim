@@ -14,7 +14,7 @@ M.setup = function()
   }
 
   require('main.utils').map('n', '<C-p>', '<cmd>Files<cr>')
-  require('main.utils').map('n', '<C-b>', '<cmd>Buffers<cr>')
+  require('main.utils').map('n', '<C-A-b>', '<cmd>Buffers<cr>')
 
   require('main.utils').map_leader_keys({
     fa = '<cmd>Ag<cr>',
