@@ -49,7 +49,7 @@ function maps.setup()
   nnoremap('<C-s>', ':w<cr>')
   inoremap('<C-s>', '<Esc>:w<cr>a')
 
-    -- Copy to system clippboard
+  -- Copy to system clippboard
   nnoremap('<leader>y', '"+y')
   vnoremap('<leader>y', '"+y')
 
@@ -78,6 +78,11 @@ function maps.setup()
   for i = 1,9 do
     nnoremap(('<Leader>%s'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i))
   end
+
+  -- copies filepath to clipboard by pressing yf
+  nnoremap('yf', ':let @+=expand("%:p")<cr>')
+  -- copies pwd to clipboard: command yd
+  nnoremap('yd', ':let @+=expand("%:p:h")<cr>')
 
   -- Leader maps
   map_leader({

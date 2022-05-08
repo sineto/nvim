@@ -6,13 +6,15 @@ function ft.setup()
 
   -- shortcuts
   -- si = smartindent; ts = tabstop; sts = softtabstop; sw = shiftwidth; sta = smarttab; et = expandtab tw = textwidth
+  cmd('autocmd FileType * set si autoindent ts=2 sts=2 sw=2 sta et')
 
   -- GO
   cmd('autocmd FileType go set si autoindent ts=4 sts=4 sw=4 sta noexpandtab formatoptions=croql')
   u.create_augroup('golang_filetype', {})
 
   -- Javascript, Typescript
-  cmd('autocmd FileType javascript,typescript set si autoindent ts=2 sts=4 sw=2 sta et')
+  cmd('autocmd FileType javascript,typescript set si autoindent ts=2 sts=2 sw=2 sta et')
+  cmd('autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc')
 
   -- MISC
   cmd('au BufNewFile,BufRead * if &ft == "" | set ft=text | endif')

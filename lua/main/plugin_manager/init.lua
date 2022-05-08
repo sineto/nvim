@@ -33,6 +33,7 @@ return require('packer').startup(function(use)
 
   -- Code completions
   use(require('specs.nvim-cmp'))
+  use(require('specs.lspkind'))
 
   -- Treesitter
   use(require('specs.treesitter'))
@@ -45,6 +46,7 @@ return require('packer').startup(function(use)
   use(require('specs.fzf'))             -- fuzzy finder
   use(require('specs.gitsigns'))        -- git signs vscode like
   use(require('specs.vimade'))
+  use(require('specs.scrollbar.bar'))
 
   -- Utilities
   use(require('specs.numb'))            -- jump line nicely
@@ -58,6 +60,7 @@ return require('packer').startup(function(use)
 
   -- Editor
   use(require('specs.autopairs'))       -- auto close pairs
+  use(require('specs.comment'))         -- code commentary
   use(require('specs.tabout'))          -- jump through pairs
   use('fedepujol/move.nvim')            -- move around lines and blocks
   use('tpope/vim-surround')
