@@ -14,9 +14,14 @@ om.lsp = {}
 M.config = function()
   local u = require('main.utils')
   local lsp_installer = require('nvim-lsp-installer')
+  local lsp_config = require('lspconfig')
+
+  lsp_installer.setup({})
 
   om.lsp.servers = {
-    'gopls'
+    'gopls',
+    'terraformls',
+    'tflint'
   }
 
   vim.diagnostic.config({
@@ -115,23 +120,32 @@ M.config = function()
       end
 
       return opts
+    end,
+    ['terraformls'] = function(opts)
+      -- disable formmating from terraformls and defines null-ls as default client
+      opts.on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end
+
+      return opts
     end
   }
 
   -- Servers ready to setup
-  lsp_installer.on_server_ready(function(server)
+  for _, lsp in ipairs(lsp_installer.get_installed_servers()) do
     local default_opts = {
       on_attach = om.lsp.on_attach,
       capabilities = capabilities
     }
 
-    if server_opts[server.name] then
-      server_opts[server.name](default_opts)
+    if server_opts[lsp.name] then
+      server_opts[lsp.name](default_opts)
     end
 
-    server:setup(default_opts)
+    lsp_config[lsp.name].setup(default_opts)
     vim.cmd('do User LspAttachBuffers')
-  end)
+  end
 end
 
 return M

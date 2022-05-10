@@ -49,7 +49,7 @@ end
 
 function M.colors()
   local configuration = vim.fn['sonokai#get_configuration']()
-  return vim.fn['sonokai#get_palette'](configuration.style)
+  return vim.fn['sonokai#get_palette'](configuration.style, configuration.colors_override)
 end
 
 return M

@@ -35,7 +35,7 @@ M.config = function()
   end
 
   require('neo-tree').setup({
-    close_if_last_window = true,
+    -- close_if_last_window = true,
     window = {
       width = 32,
       mappings = {
@@ -59,9 +59,18 @@ M.config = function()
     }
   })
 
-  require('main.utils').map_leader_keys({
-    b = '<cmd>NeoTreeShowToggle<cr>',
+  local u = require('main.utils')
+  local map_leader = u.map_leader_keys 
+  local nnoremap = u.nnoremap
+  local inoremap = u.inoremap
+
+  nnoremap('<C-b>', '<cmd>NeoTreeShowToggle<cr>')
+  inoremap('<C-b>', '<cmd>NeoTreeShowToggle<cr>')
+  map_leader({
+    b = '<cmd>NeoTreeShowToggle<cr>'
   })
+
+
 end
 
 return M

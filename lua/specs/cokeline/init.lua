@@ -11,6 +11,7 @@ M.config = function ()
   nnoremap('<C-A-l>', '<Plug>(cokeline-switch-next)')
   nnoremap('<A-a>', '<Plug>(cokeline-focus-prev)')
   nnoremap('<A-s>', '<Plug>(cokeline-focus-next)')
+  nnoremap('<A-w>', '<cmd>bd<cr>')
 
   for i = 1,9 do
     nnoremap(('<Leader>%s'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i))

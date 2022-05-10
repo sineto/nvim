@@ -7,19 +7,20 @@ M.requires = {
 M.config = function()
   require('nvim-treesitter.configs').setup({
     ensure_installed = {
-      "javascript",
-      "typescript",
-      "tsx",
-      "vue",
-      "html",
-      "css",
-      "scss",
-      "bash",
-      "lua",
-      "json",
-      "yaml",
-      "python",
-      "go"
+      'go',
+      'hcl',
+      'typescript',
+      'javascript',
+      'tsx',
+      'html',
+      'css',
+      'scss',
+      'vue',
+      'bash',
+      'lua',
+      'json',
+      'yaml',
+      'python'
     },
     highlight = {
       enable = true,

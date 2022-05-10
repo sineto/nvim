@@ -16,6 +16,14 @@ function ft.setup()
   cmd('autocmd FileType javascript,typescript set si autoindent ts=2 sts=2 sw=2 sta et')
   cmd('autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc')
 
+
+  -- Terraform
+  cmd('silent! autocmd! filetypedetect BufRead,BufNewFile *.tf')
+  cmd('autocmd BufRead,BufNewFile *.hcl set filetype=hcl')
+  cmd('autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl')
+  cmd('autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform')
+  cmd('autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json')
+
   -- MISC
   cmd('au BufNewFile,BufRead * if &ft == "" | set ft=text | endif')
 end
