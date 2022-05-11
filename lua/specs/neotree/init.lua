@@ -70,7 +70,10 @@ M.config = function()
     b = '<cmd>NeoTreeShowToggle<cr>'
   })
 
-
+  vim.cmd([[
+    hi NeoTreeNormal guibg=#000
+    hi NeoTreeNormalNC guibg=#000
+  ]])
 end
 
 return M

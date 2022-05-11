@@ -39,10 +39,13 @@ return require('packer').startup(function(use)
   use(require('specs.treesitter'))
   use(require('specs.treesitter.hlargs'))
 
+  -- Themes
+  use(require('specs.sonokai'))         -- monokai pro like theme
+
   -- UI
   use(require('specs.lualine'))         -- status line
-  use(require('specs.neotree'))         -- file explorer
   use(require('specs.cokeline'))        -- bufferline
+  use(require('specs.neotree'))         -- file explorer
   use(require('specs.fzf'))             -- fuzzy finder
   use(require('specs.gitsigns'))        -- git signs vscode like
   use(require('specs.vimade'))
@@ -54,9 +57,6 @@ return require('packer').startup(function(use)
   use(require('specs.tmux_navigator'))  -- navigate between tmux pane and nvim window
   use(require('specs.git_utils'))
   use(require('specs.diffview'))
-
-  -- Themes
-  use(require('specs.sonokai'))         -- monokai pro like theme
 
   -- Editor
   use(require('specs.autopairs'))       -- auto close pairs

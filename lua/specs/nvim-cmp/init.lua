@@ -15,6 +15,8 @@ M.config = function ()
   local cmp = require('cmp')
   local lspkind = require('lspkind')
 
+  vim.g.vsnip_snippet_dir = '/home/snio/.config/nvim/snippets'
+
   cmp.setup({
     snippet = {
       expand = function (args)

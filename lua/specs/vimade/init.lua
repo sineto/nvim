@@ -8,6 +8,10 @@ M.config = function()
     enabletreesitter = 1
   }
 
+  vim.cmd([[
+    au! FileType neo-tree VimadeBufDisable
+  ]])
+
   -- vim.cmd([[
   --   au! FileType NvimTree call vimade#BufDisable()
   --   au! BufWinEnter NvimTree call vimade#BufDisable()

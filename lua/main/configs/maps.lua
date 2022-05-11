@@ -127,6 +127,18 @@ function maps.setup()
     cnoreabbrev X x
     cnoreabbrev Q q
   ]])
+
+  -- check syntax highlight groups
+  vim.cmd([[
+    function! SynstackCheck() abort
+      if !exists("*synstack")
+        return
+      endif
+      echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    endfunction
+  ]])
+
+  nnoremap('<leader>sg', ':call SynstackCheck()<cr>')
 end
 
 return maps
