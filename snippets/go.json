@@ -1,0 +1,26 @@
+{
+    "name := value": {
+        "prefix": "av",
+        "body": "${1:name} := ${2:value}",
+        "description": "Snippet for variable attribuition"
+    },
+    "name := []type{}": { 
+        "prefix": "arr",
+        "body":"${1:name} := [${3:size}]${2:type}{$0}", 
+        "description":"Snippet for array attribuition"
+    }, 
+    "if got != expected": {
+        "prefix": "ifee",
+        "body": [
+            "if ${1:got} != ${2:expect} {",
+            "\t$0",
+            "}"
+        ],
+        "description": "Snippet for if got != want"
+    },
+    "t.Errorf": {
+        "prefix": "terr",
+        "body": "t.Errorf(${1:\"expected %q but got %q\"}, ${2:expected}, ${3:got})",
+        "description": "Snippet for t.Errorf test log function"
+    }
+}
