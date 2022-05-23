@@ -51,9 +51,10 @@ M.config = function()
         hide_gitignored = false,
         never_show = {
           '.git',
-          'node_modules',
           '.tool-versions',
           '.idea',
+          '.terraform',
+          'node_modules',
         }
       }
     }
@@ -70,10 +71,10 @@ M.config = function()
     b = '<cmd>NeoTreeShowToggle<cr>'
   })
 
-  vim.cmd([[
-    hi NeoTreeNormal guibg=#000
-    hi NeoTreeNormalNC guibg=#000
-  ]])
+  -- vim.cmd([[
+  --   au ColorScheme sonokai hi NeoTreeNormal guibg=#000
+  --   hi NeoTreeNormalNC guibg=#000
+  -- ]])
 end
 
 return M

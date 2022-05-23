@@ -9,10 +9,10 @@
         "body":"${1:name} := [${3:size}]${2:type}{$0}", 
         "description":"Snippet for array attribuition"
     }, 
-    "if got != expected": {
-        "prefix": "ifee",
+    "if got != want": {
+        "prefix": "ifgo",
         "body": [
-            "if ${1:got} != ${2:expect} {",
+            "if ${1:got} != ${2:want} {",
             "\t$0",
             "}"
         ],

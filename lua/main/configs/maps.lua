@@ -17,6 +17,8 @@ function maps.setup()
 
   -- Select all
   map('', '<C-a>', '<ESC>ggVG<cr>')
+  map('', 'H', '^')
+  map('', 'L', '$')
 
   noremap('', '<Down>','<nop>')
   noremap('', '<Up>','<nop>')

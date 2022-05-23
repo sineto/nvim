@@ -176,7 +176,22 @@ M.config = function()
         icon = "ﬥ",
         color = colors.yellow,
         name = "json"
-      }
+      },
+      tf = {
+        icon = "",
+        color = colors.purple,
+        name = "terraform"
+      },
+      tfvars = {
+        icon = "",
+        color = colors.purple,
+        name = "tfvars"
+      },
+      tfstate = {
+        icon = "ﬥ",
+        color = colors.purple,
+        name = "tfstate"
+      },
     }
   }
 end

@@ -23,6 +23,10 @@ function ft.setup()
   cmd('autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl')
   cmd('autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform')
   cmd('autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json')
+  u.create_augroup('terraform_filetype', {
+    {'BufEnter *.tf :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")'},
+    {'BufFilePost *.tf :lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")'}
+  })
 
   -- MISC
   cmd('au BufNewFile,BufRead * if &ft == "" | set ft=text | endif')
