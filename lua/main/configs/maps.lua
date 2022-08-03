@@ -72,14 +72,14 @@ function maps.setup()
   vnoremap('<A-h>', ':MoveHBlock(-1)<cr>')
 
   -- Cokeline
-  nnoremap('<C-A-h>', '<Plug>(cokeline-switch-prev)')
-  nnoremap('<C-A-l>', '<Plug>(cokeline-switch-next)')
-  nnoremap('<A-a>', '<Plug>(cokeline-focus-prev)')
-  nnoremap('<A-s>', '<Plug>(cokeline-focus-next)')
+  -- nnoremap('<C-A-h>', '<Plug>(cokeline-switch-prev)')
+  -- nnoremap('<C-A-l>', '<Plug>(cokeline-switch-next)')
+  -- nnoremap('<A-a>', '<Plug>(cokeline-focus-prev)')
+  -- nnoremap('<A-s>', '<Plug>(cokeline-focus-next)')
 
-  for i = 1,9 do
-    nnoremap(('<Leader>%s'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i))
-  end
+  -- for i = 1,9 do
+  --   nnoremap(('<Leader>%s'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i))
+  -- end
 
   -- copies filepath to clipboard by pressing yf
   nnoremap('yf', ':let @+=expand("%:p")<cr>')

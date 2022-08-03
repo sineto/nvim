@@ -6,7 +6,8 @@ M.requires = {
   require('specs.lsp.null-ls'),
   require('specs.lsp.fidget'),
   require('specs.lsp.trouble'),
-  require('specs.lsp.saga')
+  require('specs.lsp.saga'),
+  require('specs.lsp.signature')
 }
 
 om.lsp = {}
@@ -19,9 +20,15 @@ M.config = function()
   lsp_installer.setup({})
 
   om.lsp.servers = {
+    'bashls', 
+    'pylsp',
+    'eslint',
+    'tsserver',
+    'tailswindcss',
     'gopls',
     'terraformls',
-    'tflint'
+    'tflint',
+    'ansiblels',
   }
 
   vim.diagnostic.config({
@@ -121,7 +128,34 @@ M.config = function()
 
       return opts
     end,
+    ['tsserver'] = function(opts)
+      -- disable formmating from tsserver and defines null-ls as default client
+      opts.on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end
+
+      return opts
+    end,
     ['terraformls'] = function(opts)
+      -- disable formmating from terraformls and defines null-ls as default client
+      opts.on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end
+
+      return opts
+    end,
+    ['bashls'] = function(opts)
+      -- disable formmating from terraformls and defines null-ls as default client
+      opts.on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+      end
+
+      return opts
+    end,
+    ['ansiblels'] = function(opts)
       -- disable formmating from terraformls and defines null-ls as default client
       opts.on_attach = function(client)
         client.resolved_capabilities.document_formatting = false

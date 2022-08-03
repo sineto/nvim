@@ -8,19 +8,19 @@ M.config = function()
   require('nvim-treesitter.configs').setup({
     ensure_installed = {
       'go',
-      'hcl',
       'typescript',
       'javascript',
       'tsx',
+      'python',
+      'bash',
+      'hcl',
       'html',
       'css',
       'scss',
       'vue',
-      'bash',
       'lua',
       'json',
       'yaml',
-      'python'
     },
     highlight = {
       enable = true,

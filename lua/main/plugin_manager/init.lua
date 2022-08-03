@@ -57,11 +57,13 @@ return require('packer').startup(function(use)
   use(require('specs.tmux_navigator'))  -- navigate between tmux pane and nvim window
   use(require('specs.git_utils'))
   use(require('specs.diffview'))
+  use('aquasecurity/vim-tfsec')
 
   -- Editor
   use(require('specs.autopairs'))       -- auto close pairs
   use(require('specs.comment'))         -- code commentary
   use(require('specs.tabout'))          -- jump through pairs
+  use(require('specs.markdown-preview'))
   use('fedepujol/move.nvim')            -- move around lines and blocks
   use('tpope/vim-surround')
   use('kana/vim-textobj-user')

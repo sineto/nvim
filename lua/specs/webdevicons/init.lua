@@ -188,7 +188,7 @@ M.config = function()
         name = "tfvars"
       },
       tfstate = {
-        icon = "ﬥ",
+        icon = "",
         color = colors.purple,
         name = "tfstate"
       },

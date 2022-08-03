@@ -22,5 +22,14 @@
         "prefix": "terr",
         "body": "t.Errorf(${1:\"expected %q but got %q\"}, ${2:expected}, ${3:got})",
         "description": "Snippet for t.Errorf test log function"
+    },
+    "test helper": {
+        "prefix": "thelper",
+        "body": [ 
+            "func ${1:assert}(t testing.TB, ${2:params}) {",
+            "\tt.Helper()",
+            "\t$0",
+            "}"
+        ]
     }
 }
