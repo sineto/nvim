@@ -28,12 +28,9 @@ return require('packer').startup(function(use)
 
   use({'nathom/filetype.nvim'})         -- discrease nvim startup purpose
 
-  -- Lsp
-  use(require('specs.lsp'))             -- language server
-
   -- Code completions
+  use(require('specs.nvim-lsp'))             -- language server
   use(require('specs.nvim-cmp'))
-  use(require('specs.lspkind'))
 
   -- Treesitter
   use(require('specs.treesitter'))
@@ -48,14 +45,14 @@ return require('packer').startup(function(use)
   use(require('specs.neotree'))         -- file explorer
   use(require('specs.fzf'))             -- fuzzy finder
   use(require('specs.gitsigns'))        -- git signs vscode like
-  use(require('specs.vimade'))
+  -- use(require('specs.vimade'))
   use(require('specs.scrollbar.bar'))
 
   -- Utilities
   use(require('specs.numb'))            -- jump line nicely
   use(require('specs.neoscroll'))       -- smooth scroll
-  use(require('specs.tmux_navigator'))  -- navigate between tmux pane and nvim window
-  use(require('specs.git_utils'))
+  use(require('specs.tmux-navigator'))  -- navigate between tmux pane and nvim window
+  use(require('specs.git-utils'))
   use(require('specs.diffview'))
   use('aquasecurity/vim-tfsec')
 
@@ -64,6 +61,7 @@ return require('packer').startup(function(use)
   use(require('specs.comment'))         -- code commentary
   use(require('specs.tabout'))          -- jump through pairs
   use(require('specs.markdown-preview'))
+  use(require('specs.indent-line'))
   use('fedepujol/move.nvim')            -- move around lines and blocks
   use('tpope/vim-surround')
   use('kana/vim-textobj-user')
@@ -74,7 +72,7 @@ return require('packer').startup(function(use)
   -- so I move those to be loaded before it
   use(require('specs.searchbox'))       -- nicely search tool
 
-  use('~/.config/nvim/bundle/git_actions')
+  use('~/.config/nvim/bundle/git-actions')
 
   if packer_bootstrap then
     require('packer').sync()

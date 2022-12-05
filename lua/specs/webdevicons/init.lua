@@ -64,7 +64,7 @@ M.config = function()
       },
       jpeg = {
         icon = "",
-        color = "colors.purple",
+        color = colors.purple,
         name = "jpeg"
       },
       mp3 = {

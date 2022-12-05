@@ -3,8 +3,8 @@ local M = {'noib3/nvim-cokeline'}
 M.requires = {'kyazdani42/nvim-web-devicons'}
 
 M.config = function ()
-  local colors = require('main.utils').colors()
-  local nnoremap = require('main.utils').nnoremap
+  local colors = require('core.utils').colors()
+  local nnoremap = require('core.utils').nnoremap
   local get_hex = require('cokeline/utils').get_hex
 
   nnoremap('<C-A-h>', '<Plug>(cokeline-switch-prev)')

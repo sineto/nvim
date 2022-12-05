@@ -1,10 +1,10 @@
 local opts = {}
 
 function opts.setup()
-  local cmd = vim.cmd
   local o  = vim.o   -- global options
   local bo = vim.bo  -- buffer options
   local wo = vim.wo  -- window options
+  local cmd = vim.cmd
 
   cmd([[
     "" setting runtime path
@@ -58,7 +58,7 @@ function opts.setup()
 
   o.wrap            = true
   o.linebreak       = true
-  o.textwidth       = 100
+  o.textwidth       = 120
   o.list            = true
   o.listchars       = 'tab:│ ,nbsp:␣,trail:·,extends:>,precedes:<'
 

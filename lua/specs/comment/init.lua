@@ -5,7 +5,7 @@ M.config = function()
     comment_empty = false
   })
 
-  local u = require('main.utils')
+  local u = require('core.utils')
   local nnoremap = u.nnoremap
   local vnoremap = u.vnoremap
   

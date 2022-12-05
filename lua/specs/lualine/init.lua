@@ -3,7 +3,7 @@ local M = {'nvim-lualine/lualine.nvim'}
 M.requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 
 M.config = function()
-  local colors = require('main.utils').colors()
+  local colors = require('core.utils').colors()
 
   local mode_map = {
     ['n']    = '--NORMAL--',

@@ -60,7 +60,7 @@ M.config = function()
     }
   })
 
-  local u = require('main.utils')
+  local u = require('core.utils')
   local map_leader = u.map_leader_keys 
   local nnoremap = u.nnoremap
   local inoremap = u.inoremap

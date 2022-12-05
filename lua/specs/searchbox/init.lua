@@ -3,7 +3,7 @@ local M = {'VonHeikemen/searchbox.nvim'}
 M.requires = {'MunifTanjim/nui.nvim'}
 
 M.config = function()
-  local u = require('main.utils')
+  local u = require('core.utils')
 
   local nnoremap   = u.nnoremap
   local xnoremap   = u.xnoremap

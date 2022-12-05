@@ -1,8 +1,11 @@
-local M = {'williamboman/nvim-lsp-installer'}
+local M = {'williamboman/mason.nvim'}
 
 M.requires = {
   'neovim/nvim-lspconfig',
+  'williamboman/mason-lspconfig.nvim',
   'ThePrimeagen/refactoring.nvim',
+  -- 'jubnzv/virtual-types.nvim',
+  -- {'lvimuser/lsp-inlayhints.nvim', branch = 'anticonceal'},
   require('specs.lsp.null-ls'),
   require('specs.lsp.fidget'),
   require('specs.lsp.trouble'),
@@ -13,7 +16,7 @@ M.requires = {
 om.lsp = {}
 
 M.config = function()
-  local u = require('main.utils')
+  local u = require('core.utils')
   local lsp_installer = require('nvim-lsp-installer')
   local lsp_config = require('lspconfig')
 
@@ -24,11 +27,14 @@ M.config = function()
     'pylsp',
     'eslint',
     'tsserver',
+    'denols',
     'tailswindcss',
     'gopls',
     'terraformls',
     'tflint',
     'ansiblels',
+    'dockerls',
+    'yamlls'
   }
 
   vim.diagnostic.config({
@@ -47,7 +53,7 @@ M.config = function()
   end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {
@@ -58,20 +64,39 @@ M.config = function()
   }
 
   function om.lsp.on_attach(client, bufnr)
+    -- local virtualtypes_present, virtualtypes = pcall(require, 'virtualtypes')
+
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+    -- vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    -- if client.supports_method("textDocument/formatting") then
+    --     vim.api.nvim_create_autocmd("BufWritePre", {
+    --         group = augroup,
+    --         buffer = bufnr,
+    --         callback = function()
+    --             vim.lsp.buf.format({ bufnr = bufnr, async = false })
+    --         end,
+    --     })
+    -- end
+
+    -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    --   vim.lsp.diagnostic.on_publish_diagnostics, {
+    --     virtual_text = false
+    --   }
+    -- )
+
     -- Formatting file on save
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentFormattingProvider then
       vim.cmd([[
         augroup LspFormatting
           autocmd! * <buffer>
-          autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+          autocmd BufWritePre <buffer> lua vim.lsp.buf.format()
         augroup END
       ]])
     end
 
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.documentHighlight then
       vim.api.nvim_exec([[
         augroup lsp_document_highlight
           autocmd! * <buffer>
@@ -80,6 +105,10 @@ M.config = function()
         augroup END
       ]], false)
     end
+
+    -- if virtualtypes_present then
+    --   virtualtypes.on_attach(client, bufnr)
+    -- end
 
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -95,6 +124,20 @@ M.config = function()
       {'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>'},
       {'n', '<space>cc', '<cmd>lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})<CR>'},
     })
+
+    -- vim.api.nvim_create_augroup('LspAttach_inlayhints', {})
+    -- vim.api.nvim_create_autocmd('LspAttach', {
+    --   group = 'LspAttach_inlayhints',
+    --   callback = function(args)
+    --     if not (args.data and args.data.client_id) then
+    --       return
+    --     end
+    
+    --     local bufnr = args.buf
+    --     local client = vim.lsp.get_client_by_id(args.data.client_id)
+    --     require('lsp-inlayhints').on_attach(client, bufnr)
+    --   end,
+    -- })
   end
 
   lsp_installer.settings({
@@ -117,54 +160,34 @@ M.config = function()
     end
   end
 
-  -- Set custom server config
-  local server_opts = {
-    ['gopls'] = function(opts)
-      -- disable formmating from gopls and defines null-ls as default client
-      opts.on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+  -- Set custom server config  
+  local server_opts = {}
+  for _, lang in ipairs(om.lsp.servers) do
+    server_opts[lang] = function(opts)
+      if lang == 'tsserver' then
+        opts.init_options = {
+          preferences = {
+            importModuleSpecifierPreference = 'project-relative',
+          },
+        }
       end
 
-      return opts
-    end,
-    ['tsserver'] = function(opts)
-      -- disable formmating from tsserver and defines null-ls as default client
-      opts.on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+      if lang == 'denols' then
+        opts.init_options = {
+          lint = false,
+        }
       end
 
-      return opts
-    end,
-    ['terraformls'] = function(opts)
-      -- disable formmating from terraformls and defines null-ls as default client
       opts.on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
-      end
-
-      return opts
-    end,
-    ['bashls'] = function(opts)
-      -- disable formmating from terraformls and defines null-ls as default client
-      opts.on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
-      end
-
-      return opts
-    end,
-    ['ansiblels'] = function(opts)
-      -- disable formmating from terraformls and defines null-ls as default client
-      opts.on_attach = function(client)
-        client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false
+        -- disable formmating lsp engine format and defines null-ls as default client
+        client.server_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
       end
 
       return opts
     end
-  }
+  end
 
   -- Servers ready to setup
   for _, lsp in ipairs(lsp_installer.get_installed_servers()) do
@@ -173,11 +196,18 @@ M.config = function()
       capabilities = capabilities
     }
 
+    server_opts.lsp = {
+      disable_lsp = { 'denols' },
+      format_on_save = { 
+        disable = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'go' }
+      },
+    }
+
     if server_opts[lsp.name] then
       server_opts[lsp.name](default_opts)
     end
 
-    lsp_config[lsp.name].setup(default_opts)
+    lsp_config[lsp.name].setup(server_opts[lsp.name])
     vim.cmd('do User LspAttachBuffers')
   end
 end

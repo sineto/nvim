@@ -1,6 +1,9 @@
 local M = {'jose-elias-alvarez/null-ls.nvim'}
 
-M.requires = {'nvim-lua/plenary.nvim'}
+M.requires = {
+  'nvim-lua/plenary.nvim',
+  'ThePrimeagen/refactoring.nvim',
+}
 
 M.after = {'mason.nvim'}
 

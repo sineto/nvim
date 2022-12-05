@@ -1,7 +1,7 @@
 local ft = {}
 
 function ft.setup()
-  local u = require('main.utils')
+  local u = require('core.utils')
   local cmd = vim.cmd
 
   -- shortcuts
@@ -33,7 +33,7 @@ function ft.setup()
   cmd('autocmd BufRead,BufNewFile */playbook-*/*.yml,*/playbooks-*/*.yml, set filetype=yaml.ansible')
 
   -- BASH/SHELL SCRIPT
-  cmd('autocmd FileType sh set si autoindent ts=4 sts=4 sw=4 sta noexpandtab formatoptions=croql')
+  cmd('autocmd FileType sh,make set si autoindent ts=4 sts=4 sw=4 sta noexpandtab formatoptions=croql')
 
   -- MISC
   cmd('au BufNewFile,BufRead * if &ft == "" | set ft=text | endif')

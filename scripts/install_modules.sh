@@ -7,7 +7,7 @@ go install github.com/kisielk/errcheck@latest
 go install honnef.co/go/tools/cmd/staticcheck@latest
 go install mvdan.cc/sh/v3/cmd/shfmt@latest
 npm install -g vscode-langservers-extracted
-npm install -g typescript typescript-language-server
+npm install -g typescript typescript-language-server yaml-language-server
 sudo pacman -S ansible-lint
 
 asdf reshim golang

@@ -71,7 +71,7 @@ M.config = function()
     return npairs.check_break_line_char()
   end
 
-  require('main.utils').map_opts('i', '<cr>', [[v:lua.confirm()]], {expr = true, noremap = true})
+  require('core.utils').map_opts('i', '<cr>', [[v:lua.confirm()]], {expr = true, noremap = true})
 end
 
 return M

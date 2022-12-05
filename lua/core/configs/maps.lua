@@ -1,7 +1,7 @@
 local maps = {}
 
 function maps.setup()
-  local u = require('main.utils')
+  local u = require('core.utils')
 
   local cmd        = vim.cmd
   local map        = u.map
@@ -85,6 +85,9 @@ function maps.setup()
   nnoremap('yf', ':let @+=expand("%:p")<cr>')
   -- copies pwd to clipboard: command yd
   nnoremap('yd', ':let @+=expand("%:p:h")<cr>')
+
+  -- nnoremap('<C-b>', ':CHADopen<cr>')
+  -- nnoremap('<leader>b', ':CHADopen<cr>')
 
   -- Leader maps
   map_leader({

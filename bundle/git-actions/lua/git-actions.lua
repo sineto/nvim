@@ -1,8 +1,8 @@
 local M = {}
 
-local git = require('git.command_helpers')
-local Input = require("nui.input")
-local event = require("nui.utils.autocmd").event
+local git = require('git.command-helpers')
+local Input = require('nui.input')
+local event = require('nui.utils.autocmd').event
 
 local input_props = {
   relative = "editor",

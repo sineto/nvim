@@ -1,7 +1,8 @@
 local M = {'nvim-treesitter/nvim-treesitter'}
 
 M.requires = {
-  require('specs.treesitter.textobjects')
+  require('specs.treesitter.textobjects'),
+  {'RRethy/nvim-treesitter-endwise'}
 }
 
 M.config = function()
@@ -55,6 +56,11 @@ M.config = function()
           ["ic"] = "@class.inner",
         },
       },
+    },
+
+    -- RRethy/nvim-treesitter-endwise
+    endwise = {
+      enable = true,
     },
   })
 end
