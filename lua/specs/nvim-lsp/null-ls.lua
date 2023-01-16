@@ -5,8 +5,6 @@ M.requires = {
   'ThePrimeagen/refactoring.nvim',
 }
 
-M.after = {'mason.nvim'}
-
 M.config = function()
   local null_ls = require('null-ls')
 
@@ -22,9 +20,9 @@ M.config = function()
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.goimports,
     null_ls.builtins.formatting.golines,
-    null_ls.builtins.formatting.terraform_fmt.with({
-      filetypes = { 'terraform', 'tf', 'hcl', 'tfvars' }
-    }),
+    -- null_ls.builtins.formatting.terraform_fmt.with({
+    --   filetypes = { 'terraform', 'tf', 'hcl', 'tfvars' }
+    -- }),
 
     -- Diagnostics
     null_ls.builtins.diagnostics.pylint,

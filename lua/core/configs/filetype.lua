@@ -13,8 +13,8 @@ function ft.setup()
   u.create_augroup('golang_filetype', {})
 
   -- Javascript, Typescript
-  cmd('autocmd FileType javascript,typescript set si autoindent ts=2 sts=2 sw=2 sta et')
-  cmd('autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc')
+  -- cmd('autocmd FileType javascript,typescript set si autoindent ts=2 sts=2 sw=2 sta et')
+  -- cmd('autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc')
 
   -- Terraform
   cmd('silent! autocmd! filetypedetect BufRead,BufNewFile *.tf')

@@ -1,27 +1,33 @@
 local M = {'nvim-treesitter/nvim-treesitter'}
 
 M.requires = {
-  require('specs.treesitter.textobjects'),
-  {'RRethy/nvim-treesitter-endwise'}
+  require('specs.treesitter.hlargs'),
+  {'nvim-treesitter/nvim-treesitter-textobjects'},
+  {'RRethy/nvim-treesitter-endwise'},
+  {'JoosepAlviste/nvim-ts-context-commentstring'},
 }
 
 M.config = function()
   require('nvim-treesitter.configs').setup({
     ensure_installed = {
+      -- main languages
       'go',
       'typescript',
       'javascript',
       'tsx',
-      'python',
-      'bash',
       'hcl',
+      'terraform',
+
+      -- support languages
+      'gomod',
       'html',
       'css',
       'scss',
-      'vue',
-      'lua',
+      'bash',
+      'python',
       'json',
       'yaml',
+      'lua',
     },
     highlight = {
       enable = true,
@@ -33,6 +39,7 @@ M.config = function()
     },
 
     -- Plugins
+    -- JoosepAlviste/nvim-ts-context-commentstring
     context_commentstring = {
         enable = true,
     },

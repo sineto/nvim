@@ -72,6 +72,9 @@ function opts.setup()
   o.wildmode = 'list:longest'
   o.completeopt = 'menu,menuone,noinsert,noselect'
   o.clipboard = 'unnamed,unnamedplus'
+
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
 end
 
 return opts

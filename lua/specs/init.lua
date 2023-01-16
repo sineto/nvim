@@ -25,54 +25,64 @@ cmd([[packadd packer.nvim]])
 return require('packer').startup(function(use)
   -- Let Packer manage itself
   use({'wbthomason/packer.nvim', opt = true})
-
-  use({'nathom/filetype.nvim'})         -- discrease nvim startup purpose
-
-  -- Code completions
-  use(require('specs.nvim-lsp'))             -- language server
-  use(require('specs.nvim-cmp'))
+  
+  use({'nvim-lua/plenary.nvim'})
 
   -- Treesitter
   use(require('specs.treesitter'))
-  use(require('specs.treesitter.hlargs'))
+
+  -- Code completions
+  use(require('specs.nvim-lsp'))        -- language server
+  use(require('specs.nvim-cmp'))        -- code completion
 
   -- Themes
   use(require('specs.sonokai'))         -- monokai pro like theme
+  -- use(require('specs.sinokai'))
 
   -- UI
-  use(require('specs.lualine'))         -- status line
-  use(require('specs.cokeline'))        -- bufferline
-  use(require('specs.neotree'))         -- file explorer
-  use(require('specs.fzf'))             -- fuzzy finder
-  use(require('specs.gitsigns'))        -- git signs vscode like
-  -- use(require('specs.vimade'))
-  use(require('specs.scrollbar.bar'))
+  use(require('specs.nvim-ui.nvim-tree')) -- tree viewer
+  -- use(require('specs.nvim-ui.neo-tree'))
+  use(require('specs.nvim-ui.cokeline'))  -- buffer line
+  use(require('specs.nvim-ui.lualine'))   -- status line
+  use(require('specs.nvim-ui.fzf'))       -- fuzzy finder
+  use(require('specs.nvim-ui.winbar'))
+  use(require('specs.nvim-ui.glance'))    -- lsp locations previewer
+  use(require('specs.nvim-ui.trouble'))   -- lsp errors previwer
+  use(require('specs.nvim-ui.sad'))
+  use(require('specs.nvim-ui.kind'))
+  use(require('specs.nvim-ui.signature'))
 
-  -- Utilities
-  use(require('specs.numb'))            -- jump line nicely
-  use(require('specs.neoscroll'))       -- smooth scroll
-  use(require('specs.tmux-navigator'))  -- navigate between tmux pane and nvim window
-  use(require('specs.git-utils'))
-  use(require('specs.diffview'))
-  use('aquasecurity/vim-tfsec')
+  -- UI Enhancement
+  use(require('specs.nvim-ui-enhance.saga'))
+  use(require('specs.nvim-ui-enhance.tmux-navigator')) -- integration with tmux
+  use(require('specs.nvim-ui-enhance.winresizer'))     -- rezise split windows
+  use(require('specs.nvim-ui-enhance.scrollbar')) -- scroll bar
+  use(require('specs.nvim-ui-enhance.neoscroll'))      -- smooth scrolling
+  use(require('specs.nvim-ui-enhance.numb'))           -- jump to number line
+  use(require('specs.nvim-ui-enhance.fidget'))
+  use(require('specs.nvim-ui-enhance.searchbox'))
+  use(require('specs.nvim-ui-enhance.markdown-preview')) -- browser markdown previwer
 
   -- Editor
-  use(require('specs.autopairs'))       -- auto close pairs
-  use(require('specs.comment'))         -- code commentary
-  use(require('specs.tabout'))          -- jump through pairs
-  use(require('specs.markdown-preview'))
-  use(require('specs.indent-line'))
-  use('fedepujol/move.nvim')            -- move around lines and blocks
+  use(require('specs.nvim-editor.autopairs'))
+  use(require('specs.nvim-editor.indent-line'))
+  use(require('specs.nvim-editor.comment'))
+  use(require('specs.nvim-editor.tabout'))
+  use(require('specs.nvim-editor.textobjs'))
   use('tpope/vim-surround')
-  use('kana/vim-textobj-user')
-  use('kana/vim-textobj-line')          -- select line
-  use('sgur/vim-textobj-parameter')     -- select params
+  use('fedepujol/move.nvim')            -- move around lines and blocks
 
-  -- seems searchbox.nvim have conflicts with some plugins
-  -- so I move those to be loaded before it
-  use(require('specs.searchbox'))       -- nicely search tool
 
-  use('~/.config/nvim/bundle/git-actions')
+  -- Git utils
+  use(require('specs.nvim-git.gitsigns'))
+  use(require('specs.nvim-git.git-conflict'))
+  use(require('specs.nvim-git.diffview'))
+
+  -- -- Utilities
+  -- use(require('specs.git-utils'))
+  -- use('aquasecurity/vim-tfsec')
+
+  -- use('~/.config/nvim/bundle/git-actions')
 
   if packer_bootstrap then
     require('packer').sync()

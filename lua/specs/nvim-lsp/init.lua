@@ -1,43 +1,22 @@
-local M = {'williamboman/mason.nvim'}
+local M = {'neovim/nvim-lspconfig'}
 
-M.requires = {
-  'neovim/nvim-lspconfig',
+M.requires = { 
+  require('specs.nvim-lsp.mason'),
   require('specs.nvim-lsp.null-ls'),
-  require('specs.nvim-lsp.mason-config'),
-  require('specs.nvim-lsp.signature'),
-  require('specs.nvim-lsp.saga'),
-  require('specs.nvim-lsp.trouble'),
-  require('specs.nvim-lsp.fidget'),
-  require('specs.nvim-lsp.lspkind'),
-  {'lvimuser/lsp-inlayhints.nvim', branch = 'anticonceal'},
-  -- 'lvimuser/lsp-inlayhints.nvim',
 }
 
-
 M.config = function()
-  om.lsp = {}
+  vim.diagnostic.config({
+    virtual_text = false,
+    underline = true, 
+    signs = true 
+  })
 
-  local u = require('core.utils')
-
-  -- Sign column
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
   for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
+    local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
-
-  require('lsp-inlayhints').setup()
-  require('mason').setup({
-    max_concurrent_installers = 10,
-    log_level = vim.log.levels.DEBUG,
-    ui = {
-      icons = {
-          package_installed = "",
-          package_pending = "",
-          package_uninstalled = "",
-      },
-    },
-  })
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   om.lsp.capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
@@ -54,9 +33,9 @@ M.config = function()
     resolveSupport = {
       properties = vim.list_extend(
         capabilities.textDocument.codeAction.resolveSupport.properties, {
-          "documentation",
-          "detail",
-          "additionalTextEdits",
+          'documentation',
+          'detail',
+          'additionalTextEdits',
         }
       ),
     },
@@ -86,9 +65,14 @@ M.config = function()
       ]], false)
     end
 
+    if client.server_capabilities.documentSymbolProvider then
+      require('nvim-navic').attach(client, bufnr)
+    end
+
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    u.bufmap_keys(bufnr, {
+    -- TODO: sometimes goto definitions map don't work
+    om.bufmap_keys(bufnr, {
       {'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>'},
       {'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>'},
       -- {'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>'},
