@@ -2,7 +2,12 @@ local M = {'glepnir/lspsaga.nvim'}
 
 M.config = function ()
   require('lspsaga').setup({
-    code_action_icon = ''
+    code_action_icon = '',
+    lightbulb = {
+      enable = false,
+      sign = false,
+      virtual_text = false
+    }
   })
 
   om.nnoremap('<leader>ca', '<cmd>Lspsaga code_action<cr>')

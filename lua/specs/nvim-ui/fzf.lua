@@ -2,9 +2,9 @@ local M = {'ibhagwan/fzf-lua'}
 
 M.branch = 'main'
 
-M.requires = {
+M.dependencies = {
   {'junegunn/fzf', run = './install --bin'},
-  {'nvim-tree/nvim-web-devicons'},
+  -- {'nvim-tree/nvim-web-devicons'},
 }
 
 M.cond = function()

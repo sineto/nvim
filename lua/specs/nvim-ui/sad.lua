@@ -1,6 +1,6 @@
 local M = {'ray-x/sad.nvim'}
 
-M.requires = {
+M.dependencies = {
   { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
 }
 

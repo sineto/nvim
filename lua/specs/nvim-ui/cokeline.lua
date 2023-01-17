@@ -1,8 +1,8 @@
 local M = {'noib3/nvim-cokeline'}
 
-M.requires = {
-  'kyazdani42/nvim-web-devicons'
-}
+-- M.dependencies = {
+--   'kyazdani42/nvim-web-devicons'
+-- }
 
 M.config = function ()
   local colors = om.colors()

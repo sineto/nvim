@@ -1,6 +1,6 @@
 local M = {'jose-elias-alvarez/null-ls.nvim'}
 
-M.requires = {
+M.dependencies = {
   'nvim-lua/plenary.nvim',
   'ThePrimeagen/refactoring.nvim',
 }

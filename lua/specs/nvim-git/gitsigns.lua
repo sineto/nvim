@@ -1,6 +1,6 @@
 local M = {'lewis6991/gitsigns.nvim'}
 
-M.requires = {
+M.dependencies = {
   'nvim-lua/plenary.nvim',
   'tpope/vim-fugitive',
 }

@@ -1,6 +1,6 @@
 local M = {'VonHeikemen/searchbox.nvim'}
 
-M.requires = {
+M.dependencies = {
   'MunifTanjim/nui.nvim'
 }
 

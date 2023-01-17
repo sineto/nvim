@@ -1,8 +1,8 @@
 local M = {'akinsho/git-conflict.nvim'}
 
-M.tag = '*'
+M.version = '*'
 
-M.requires = {
+M.dependencies = {
   'https://gitlab.com/yorickpeterse/nvim-pqf.git',
 }
 

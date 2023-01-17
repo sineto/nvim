@@ -1,9 +1,9 @@
 local M = {'sindrets/diffview.nvim'}
 
-M.requires = {
+M.dependencies = {
   'nvim-lua/plenary.nvim',
-  'kyazdani42/nvim-web-devicons',
-  {'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim'},
+  -- 'kyazdani42/nvim-web-devicons',
+  {'TimUntersberger/neogit', dependencies = 'nvim-lua/plenary.nvim'},
 }
 
 M.config =  function()
@@ -36,7 +36,7 @@ M.config =  function()
 
   require('diffview').setup({
     diff_binaries = false,    -- Show diffs for binaries
-    use_icons = true,        -- Requires nvim-web-devicons
+    use_icons = true,        -- dependencies nvim-web-devicons
     file_panel = {
       win_config = {
         position = 'left',

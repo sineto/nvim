@@ -1,6 +1,6 @@
 local M = {'folke/trouble.nvim'}
 
-M.requires = {
+M.dependencies = {
   'kyazdani42/nvim-web-devicons',
 }
 

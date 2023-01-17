@@ -2,8 +2,8 @@ local M = {'abecodes/tabout.nvim'}
 
 -- M.after = 'nvim-comp'
 
-M.after = 'nvim-autopairs'
-M.wants = 'nvim-treesitter'
+-- M.after = 'nvim-autopairs'
+-- M.wants = 'nvim-treesitter'
 
 M.config = function()
   require('tabout').setup({

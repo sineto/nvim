@@ -1,6 +1,6 @@
 local M = {'nvim-treesitter/nvim-treesitter'}
 
-M.requires = {
+M.dependencies = {
   require('specs.treesitter.hlargs'),
   {'nvim-treesitter/nvim-treesitter-textobjects'},
   {'RRethy/nvim-treesitter-endwise'},
@@ -72,6 +72,6 @@ M.config = function()
   })
 end
 
-M.run = ':TSUpdate'
+M.build = ':TSUpdate'
 
 return M

@@ -1,6 +1,6 @@
 local M = {'windwp/nvim-autopairs'}
 
-M.requires = {
+M.dependencies = {
   {'windwp/nvim-ts-autotag'}
 }
 

@@ -2,7 +2,7 @@ local M = {'ms-jpq/chadtree'}
 
 M.branch = 'chad'
 
-M.run = '!python3 -m chadtree deps'
+M.build = '!python3 -m chadtree deps'
 
 M.config = function()
 

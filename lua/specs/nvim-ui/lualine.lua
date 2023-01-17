@@ -1,8 +1,8 @@
 local M = {'nvim-lualine/lualine.nvim'}
 
-M.requires = { 
-  'kyazdani42/nvim-web-devicons',
-}
+-- M.dependencies = { 
+--   'kyazdani42/nvim-web-devicons',
+-- }
 
 M.config = function()
   local colors = om.colors()

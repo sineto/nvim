@@ -1,6 +1,6 @@
 local M = {'m-demare/hlargs.nvim'}
 
-M.requires = {
+M.dependencies = {
   'nvim-treesitter/nvim-treesitter'
 }
 

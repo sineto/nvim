@@ -1,6 +1,6 @@
 local M = {'neovim/nvim-lspconfig'}
 
-M.requires = { 
+M.dependencies = { 
   require('specs.nvim-lsp.mason'),
   require('specs.nvim-lsp.null-ls'),
 }

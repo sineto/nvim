@@ -1,6 +1,6 @@
 local M = {'nvim-treesitter/nvim-treesitter-textobjects'}
 
-M.after = 'nvim-treesitter'
+-- M.after = 'nvim-treesitter'
 
 M.config = function()
 end

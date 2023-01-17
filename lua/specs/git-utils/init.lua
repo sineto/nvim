@@ -1,6 +1,6 @@
 local M = {'sodapopcan/vim-twiggy'}
 
-M.requires = {
+M.dependencies = {
   'tpope/vim-fugitive',
   'junegunn/gv.vim',
   'kdheepak/lazygit.nvim',

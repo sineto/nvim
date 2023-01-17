@@ -1,6 +1,6 @@
 local M = {'chrisgrieser/nvim-various-textobjs'}
 
-M.requires = {
+M.dependencies = {
   'echasnovski/mini.ai',
   'kana/vim-textobj-user',
   'sgur/vim-textobj-parameter',

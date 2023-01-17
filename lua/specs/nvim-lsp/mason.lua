@@ -1,6 +1,6 @@
 local M = {'williamboman/mason.nvim'}
 
-M.requires = {
+M.dependencies = {
   require('specs.nvim-lsp.mason-lspconfig')
 }
 

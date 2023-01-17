@@ -56,12 +56,12 @@ nnoremap('<leader>nh', ':nohlsearch<CR>')
 vnoremap('<leader>nh', ':nohlsearch<CR>')
 
 -- Move lines and blocks
-nnoremap('<A-j>', ':MoveLine(1)<cr>')
-nnoremap('<A-k>', ':MoveLine(-1)<cr>')
-vnoremap('<A-j>', ':MoveBlock(1)<cr>')
-vnoremap('<A-k>', ':MoveBlock(-1)<cr>')
-vnoremap('<A-l>', ':MoveHBlock(1)<cr>')
-vnoremap('<A-h>', ':MoveHBlock(-1)<cr>')
+-- nnoremap('<A-j>', ':MoveLine(1)<cr>')
+-- nnoremap('<A-k>', ':MoveLine(-1)<cr>')
+-- vnoremap('<A-j>', ':MoveBlock(1)<cr>')
+-- vnoremap('<A-k>', ':MoveBlock(-1)<cr>')
+-- vnoremap('<A-l>', ':MoveHBlock(1)<cr>')
+-- vnoremap('<A-h>', ':MoveHBlock(-1)<cr>')
 
 -- copies filepath to clipboard by pressing yf
 nnoremap('yf', ':let @+=expand("%:p")<cr>')
@@ -70,14 +70,11 @@ nnoremap('yd', ':let @+=expand("%:p:h")<cr>')
 
 -- Leader maps
 map_leader({
-  -- packer.nvim
-  mc = '<cmd>PackerCompile<cr>',
-  mi = '<cmd>PackerInstall<cr>',
-  mu = '<cmd>PackerUpdate<cr>',
-  ms = '<cmd>PackerSync<cr>',
+  -- lazy.nvim
+  mi = '<cmd>Lazy install<cr>',
+  mu = '<cmd>Lazy update<cr>',
+  ms = '<cmd>Lazy sync<cr>',
 
-  -- vim-twiggy and git_actions
-  -- gcop = '<cmd>Twiggy<cr>',
   -- gcb = '<cmd>GitActionsCheckoutB<cr>'
 })
 

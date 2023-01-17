@@ -1,6 +1,6 @@
 local M = {'~/Devspace/personal/sinokai.nvim'}
 
-M.requires = {'rktjmp/lush.nvim'}
+M.dependencies = {'rktjmp/lush.nvim'}
 
 M.config = function()
   require('sinokai').setup({})

@@ -1,6 +1,6 @@
 local M = {}
 
-M.requires = {}
+M.dependencies = {}
 
 M.config = function()
 end
